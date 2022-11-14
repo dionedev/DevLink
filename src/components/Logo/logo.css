@@ -1,0 +1,12 @@
+.firstNameLogo {
+  color: #ffffff;
+  font-size: clamp(35px, 4.5vw, 54px);
+  margin-bottom: 40px;
+}
+
+.secondNameLogo {
+  background: linear-gradient(#e18700, #ffd43a);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

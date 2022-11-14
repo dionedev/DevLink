@@ -1,0 +1,7 @@
+.mediaIcon svg {
+  transition: transform .4s;
+}
+
+.mediaIcon svg:hover {
+  transform: scale(1.2);
+}
