@@ -1,7 +1,7 @@
 .firstNameLogo {
   color: #ffffff;
   font-size: clamp(35px, 4.5vw, 54px);
-  margin-bottom: 40px;
+  margin: 40px 0 40px;
 }
 
 .secondNameLogo {
