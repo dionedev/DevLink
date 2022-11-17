@@ -1,0 +1,69 @@
+.adminContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.label {
+  color: #FFF;
+  margin: 8px 0 14px;
+}
+
+.containerColor {
+  display: flex;
+  margin: 14px 0;
+  gap: 22px;
+}
+
+.containerColor label {
+  margin-right: 14px;
+}
+
+.btnRegister {
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnRegister svg {
+  margin-left: 8px;
+}
+
+.subTitleLinks {
+  color: #FFF;
+  margin: 28px 0 14px 0;
+}
+
+.linkList {
+  max-width: 600px;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(36, 36, 36, 0.35);
+  border-radius: 6px;
+  padding: 14px 8px;
+}
+
+.btnDelete {
+  background-color: transparent;
+  border: none;
+}
+
+.animationPop {
+  animation: .5s animatePop;
+}
+
+@keyframes animatePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.7, 0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
