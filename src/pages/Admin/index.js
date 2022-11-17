@@ -54,17 +54,20 @@ export default function Admin() {
           </div>
         </section>
 
-        <section className="previewSection">
-          <label>Seu link está ficando assim 👇</label>
-          <article 
-            className="linkList"
-            style={{marginTop: 8, backgroundColor: linkBackgroundColorInput}}
-          >
-            <p style={{color: linkColorInput}}>
-              {linkNameInput}
-            </p>
-          </article>
-        </section>
+        {linkNameInput ?
+
+          <section className="linksPreviewSection">
+            <label className="label">Seu link está ficando assim 👇</label>
+            <article 
+              className="linkListPreview"
+              style={{backgroundColor: linkBackgroundColorInput}}
+            >
+              <p style={{color: linkColorInput}}>
+                {linkNameInput}
+              </p>
+            </article>
+          </section>
+        : false }
 
         <button className="btnRegister" type="submit">
           Cadastrar <MdAddLink size={24} color="#FFF" />
