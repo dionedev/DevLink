@@ -2,9 +2,21 @@ import { useState } from "react";
 import { Header } from "../../components/Header";
 import { Logo } from '../../components/Logo';
 import { Input } from '../../components/Input';
-import { MdAddLink } from 'react-icons/md'
-import { FiTrash2 } from 'react-icons/fi'
-import './admin.css'
+import { MdAddLink } from 'react-icons/md';
+import { FiTrash2 } from 'react-icons/fi';
+import { toast } from "react-toastify";
+import { database } from '../../services/firebaseConnection';
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  query,
+  orderBy,
+  doc,
+  deleteDoc
+} from 'firebase/firestore';
+
+import './admin.css';
 
 export default function Admin() {
   const [linkNameInput, setLinkNameInput] = useState("")
@@ -12,12 +24,33 @@ export default function Admin() {
   const [linkBackgroundColorInput, setLinkBackgroundColorInput] = useState("#f1f1f1")
   const [linkColorInput, setLinkColorInput] = useState("#121212")
 
+  function handleRegister(event) {
+    event.preventDefault();
+    
+    if(linkNameInput === '' || urlLinkInput === '') {
+      toast.warn("Por favor, preencha todos os campos.")
+      return;
+    }
+    addDoc(collection(database, "links"), {
+      name: linkNameInput,
+      url: urlLinkInput,
+      backgroundColor: linkBackgroundColorInput,
+      linkColor: linkColorInput,
+      created: new Date()
+
+    }).then(() => {
+      setLinkNameInput("")
+      setUrlLinkInput("")
+      toast.success("Link registrado com sucesso.")
+
+    }).catch(() => toast.error("Ops, erro ao salvar o link"))
+  }
+
   return(
     <div className="adminContainer">
       <Header />
       <Logo />
-
-      <form className="form">
+      <form className="form" onSubmit={handleRegister}>
         <label className="label">Nome do link</label>
         <Input 
           placeholder="Nome do link" 
