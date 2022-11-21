@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { Logo } from '../../components/Logo';
 import { Input } from '../../components/Input';
@@ -24,6 +24,30 @@ export default function Admin() {
   const [linkBackgroundColorInput, setLinkBackgroundColorInput] = useState("#f1f1f1")
   const [linkColorInput, setLinkColorInput] = useState("#121212")
 
+  const [linkList, setLinkList] = useState([])
+
+  useEffect(() => {
+    const linksReference = collection(database, "links")
+    const queryReference = query(linksReference, orderBy("created", "asc"))
+
+    const unsub = onSnapshot(queryReference, (snapshot) => {
+      let listReturnedFromDB = []
+
+      snapshot.forEach((documentDB) => {
+        listReturnedFromDB.push(
+          {
+            id: documentDB.id,
+            name: documentDB.data().name,
+            url: documentDB.data().url,
+            bg: documentDB.data().backgroundColor,
+            color: documentDB.data().linkColor
+          }
+        )
+      })
+      setLinkList(listReturnedFromDB)
+    })
+  }, [])
+
   function handleRegister(event) {
     event.preventDefault();
     
@@ -41,9 +65,14 @@ export default function Admin() {
     }).then(() => {
       setLinkNameInput("")
       setUrlLinkInput("")
-      toast.success("Link registrado com sucesso.")
 
     }).catch(() => toast.error("Ops, erro ao salvar o link"))
+  }
+
+  async function handleDeleteLink(id) {
+    const documentReference = doc(database, "links", id)
+    await deleteDoc(documentReference)
+    toast.success("Link deletado com sucesso.")
   }
 
   return(
@@ -111,24 +140,20 @@ export default function Admin() {
         Meus links
       </h2>
 
-      <article 
-        className="linkList animationPop"
-        style={
-          {
-            background: "#000",
-            color: "#FFF"
-          }
-        }
-      >
-        <p>
-          Grupo exclusivo no Telegram
-        </p>
-        <div>
-          <button className="btnDelete">
-            <FiTrash2  size={20} color="#DD2222" />
-          </button>
-        </div>
-      </article>
+      {linkList.map((item, index) => (
+        <article
+          key={index} 
+          className="linkList animationPop"
+          style={{ background: item.bg, color: item.color }}
+        >
+          <p>{item.name}</p>
+          <div>
+            <button className="btnDelete" onClick={() => handleDeleteLink(item.id)}>
+              <FiTrash2  size={20} color="#DD2222" />
+            </button>
+          </div>
+        </article>
+      ))}
     </div>
   ) 
 }
