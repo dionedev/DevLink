@@ -10,13 +10,15 @@
 .homeHeader {
   margin-bottom: 18px;
   text-align: center;
+  width: 600px;
+  max-width: 90%;
 }
 
 .homeHeader h1 {
   margin-bottom: 14px;
   color: #ffffff;
   font-size: clamp(25px, 2.5vw, 40px);
-  padding-top: 94px;
+  /* padding-top: 94px; */
 }
 
 .homeHeader span {

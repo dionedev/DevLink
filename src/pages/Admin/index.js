@@ -30,7 +30,7 @@ export default function Admin() {
     const linksReference = collection(database, "links")
     const queryReference = query(linksReference, orderBy("created", "asc"))
 
-    const unsub = onSnapshot(queryReference, (snapshot) => {
+    onSnapshot(queryReference, (snapshot) => {
       let listReturnedFromDB = []
 
       snapshot.forEach((documentDB) => {
@@ -149,7 +149,7 @@ export default function Admin() {
           <p>{item.name}</p>
           <div>
             <button className="btnDelete" onClick={() => handleDeleteLink(item.id)}>
-              <FiTrash2  size={20} color="#DD2222" />
+              <FiTrash2  size={20} color="#FFF" />
             </button>
           </div>
         </article>

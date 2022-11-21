@@ -74,8 +74,9 @@
 }
 
 .btnDelete {
-  background-color: transparent;
-  border: none;
+  border: 1px solid #000;
+  background-color: #050507;
+  border-radius: 4px;
 }
 
 .animationPop {
