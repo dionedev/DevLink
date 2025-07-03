@@ -31,7 +31,5 @@
 <br>
 <br>
 
-🔗 [Try the App](https://organizelinks.netlify.app/)
-
 
 
